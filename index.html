@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohsin Ali - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-cyan': '#00fff9',
+                        'dark-bg': '#0a0e27',
+                        'dark-card': '#141937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #00fff9, #00b3ff, #00fff9);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Hexagon container */
+        .hexagon-container {
+            position: relative;
+            width: 400px;
+            height: 460px;
+            margin: 0 auto;
+        }
+
+        .hexagon {
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: linear-gradient(145deg, rgba(0, 255, 249, 0.3), rgba(0, 179, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        .hexagon::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: #0a0e27;
+            z-index: 1;
+        }
+
+        .hexagon img {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(0, 255, 249, 0.5),
+                            0 0 60px rgba(0, 255, 249, 0.3),
+                            0 0 90px rgba(0, 255, 249, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(0, 255, 249, 0.7),
+                            0 0 80px rgba(0, 255, 249, 0.5),
+                            0 0 120px rgba(0, 255, 249, 0.3);
+            }
+        }
+
+        /* Enhanced pulse for hexagon on hover */
+        .hexagon-pulse:hover .hexagon {
+            animation: glow-pulse 1.5s ease-in-out infinite;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        /* Button animations */
+        .btn-primary {
+            background: linear-gradient(135deg, #00fff9, #00b3ff);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 249, 0.4);
+        }
+
+        .btn-secondary {
+            border: 2px solid #00fff9;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #00fff9, #00b3ff);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 249, 0.4);
+        }
+
+        /* Social icons */
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #00fff9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #00fff9;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, #00fff9, #00b3ff);
+            color: #0a0e27;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 255, 249, 0.4);
+        }
+
+        /* Navbar scroll effect */
+        .navbar-scrolled {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 255, 249, 0.1);
+        }
+
+        /* Active nav link */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00fff9, #00b3ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #00fff9;
+        }
+
+        /* Responsive hexagon */
+        @media (max-width: 768px) {
+            .hexagon-container {
+                width: 300px;
+                height: 345px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hexagon-container {
+                width: 250px;
+                height: 287px;
+            }
+        }
+
+        /* Typing animation cursor */
+        .typing-cursor {
+            animation: blink 0.7s infinite;
+            font-weight: 300;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Photo Modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            cursor: pointer;
+        }
+
+        .photo-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-photo {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 255, 249, 0.3);
+            animation: zoomIn 0.3s ease;
+            cursor: default;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: #00fff9;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        /* Brand photo pulse animation */
+        .brand-photo {
+            transition: all 0.3s ease;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 249, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(0, 255, 249, 0);
+            }
+        }
+
+        .brand-photo-container:hover .brand-photo {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 249, 0.8);
+        }
+
+        .brand-text {
+            transition: all 0.3s ease;
+        }
+
+        .brand-container:hover .brand-text {
+            transform: translateX(5px);
+            color: #00fff9;
+        }
+
+        /* Typing animation cursor */
+        .typing-cursor {
+            animation: blink 0.7s infinite;
+            font-weight: 300;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Light Mode Styles - Professional & Clean Design */
+        :root:not(.dark) {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-footer: #f1f1f1;
+            --text-primary: #343a40;
+            --text-secondary: #6c757d;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --border-color: #dee2e6;
+            --divider-color: #ced4da;
+            --card-hover: #f1f1f1;
+            --button-secondary: #e9ecef;
+        }
+
+        /* Body & General Background */
+        :root:not(.dark) body {
+            background: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+            transition: all 0.3s ease;
+        }
+
+        /* Primary Background */
+        :root:not(.dark) .bg-dark-bg {
+            background: var(--bg-primary) !important;
+        }
+
+        /* Card & Section Backgrounds */
+        :root:not(.dark) .bg-dark-card {
+            background: var(--bg-secondary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        :root:not(.dark) .bg-slate-800 {
+            background: var(--bg-secondary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        :root:not(.dark) .bg-slate-900 {
+            background: var(--bg-secondary) !important;
+        }
+
+        /* Card Hover Effect */
+        :root:not(.dark) .group:hover .bg-dark-card,
+        :root:not(.dark) .group:hover .bg-slate-800 {
+            background: var(--card-hover) !important;
+        }
+
+        /* Text Colors */
+        :root:not(.dark) .text-white {
+            color: var(--text-primary) !important;
+        }
+
+        :root:not(.dark) .text-gray-400 {
+            color: var(--text-secondary) !important;
+        }
+
+        :root:not(.dark) .text-gray-500 {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Accent Colors (Links, Icons, Buttons) */
+        :root:not(.dark) .text-neon-cyan {
+            color: var(--accent-color) !important;
+        }
+
+        :root:not(.dark) .border-neon-cyan {
+            border-color: var(--accent-color) !important;
+        }
+
+        /* Hover Effects for Links & Icons */
+        :root:not(.dark) .social-icon {
+            border-color: var(--accent-color) !important;
+            color: var(--accent-color) !important;
+        }
+
+        :root:not(.dark) .social-icon:hover {
+            background: var(--accent-hover) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-hover) !important;
+        }
+
+        :root:not(.dark) .nav-link {
+            color: var(--text-primary) !important;
+        }
+
+        :root:not(.dark) .nav-link:hover {
+            color: var(--accent-hover) !important;
+        }
+
+        :root:not(.dark) .nav-link.active {
+            color: var(--accent-color) !important;
+        }
+
+        :root:not(.dark) .nav-link::after {
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)) !important;
+        }
+
+        /* Gradient Backgrounds */
+        :root:not(.dark) .from-dark-card {
+            --tw-gradient-from: var(--bg-secondary) !important;
+        }
+
+        :root:not(.dark) .to-dark-bg {
+            --tw-gradient-to: var(--bg-primary) !important;
+        }
+
+        /* Navbar Styling */
+        :root:not(.dark) nav {
+            background: var(--bg-secondary) !important;
+        }
+
+        :root:not(.dark) .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* Primary Buttons */
+        :root:not(.dark) .btn-primary,
+        :root:not(.dark) a[class*="bg-gradient-to-r"] {
+            background: var(--accent-color) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-color) !important;
+        }
+
+        :root:not(.dark) .btn-primary:hover,
+        :root:not(.dark) a[class*="bg-gradient-to-r"]:hover {
+            background: var(--accent-hover) !important;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25) !important;
+        }
+
+        /* Secondary Buttons */
+        :root:not(.dark) .btn-secondary {
+            background: var(--button-secondary) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        :root:not(.dark) .btn-secondary:hover {
+            background: var(--accent-color) !important;
+            color: #ffffff !important;
+            border-color: var(--accent-color) !important;
+        }
+
+        /* Disabled Buttons (Under Development) */
+        :root:not(.dark) button[disabled] {
+            background: #e9ecef !important;
+            color: #adb5bd !important;
+        }
+
+        :root:not(.dark) .bg-slate-700 {
+            background: #e9ecef !important;
+            color: #adb5bd !important;
+        }
+
+        /* Borders & Dividers */
+        :root:not(.dark) .border-slate-700 {
+            border-color: var(--border-color) !important;
+        }
+
+        /* Project & Certificate Cards */
+        :root:not(.dark) [class*="border-neon-cyan"],
+        :root:not(.dark) [class*="border-yellow-500"],
+        :root:not(.dark) [class*="border-purple-500"],
+        :root:not(.dark) [class*="border-emerald-500"],
+        :root:not(.dark) [class*="border-blue-500"],
+        :root:not(.dark) [class*="border-orange-500"],
+        :root:not(.dark) [class*="border-pink-500"],
+        :root:not(.dark) [class*="border-cyan-500"],
+        :root:not(.dark) [class*="border-indigo-500"] {
+            border-color: var(--border-color) !important;
+        }
+
+        :root:not(.dark) .group:hover[class*="border-"] {
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15) !important;
+        }
+
+        /* Hexagon Photo Border */
+        :root:not(.dark) .hexagon::before {
+            background: var(--bg-primary) !important;
+        }
+
+        :root:not(.dark) .hexagon {
+            background: linear-gradient(145deg, rgba(0, 123, 255, 0.15), rgba(0, 86, 179, 0.08)) !important;
+        }
+
+        /* Technology Badge Colors */
+        :root:not(.dark) span[class*="bg-dark-bg"] {
+            background: var(--bg-primary) !important;
+            color: var(--accent-color) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        :root:not(.dark) span[class*="bg-slate-900"] {
+            background: var(--bg-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        /* Certificate & Status Badges */
+        :root:not(.dark) [class*="bg-neon-cyan"],
+        :root:not(.dark) [class*="bg-yellow-500"],
+        :root:not(.dark) [class*="bg-purple-500"],
+        :root:not(.dark) [class*="bg-emerald-500"] {
+            opacity: 1;
+        }
+
+        /* Footer Styling */
+        :root:not(.dark) footer {
+            background: var(--bg-footer) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* Gradient Text */
+        :root:not(.dark) .gradient-text {
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover), var(--accent-color)) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        /* Theme Toggle Icon */
+        :root:not(.dark) #theme-toggle {
+            color: var(--accent-color) !important;
+        }
+
+        :root:not(.dark) #theme-toggle:hover {
+            color: var(--accent-hover) !important;
+        }
+
+        /* Smooth Transitions for All Elements */
+        :root:not(.dark) * {
+            transition-property: background-color, color, border-color, box-shadow;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+        }
+
+        /* Mobile Menu Button */
+        :root:not(.dark) #mobile-menu-btn {
+            color: var(--accent-color) !important;
+        }
+
+        /* Section Backgrounds - White for About, Projects, Certificates, Services */
+        :root:not(.dark) #about,
+        :root:not(.dark) #projects,
+        :root:not(.dark) #certificates,
+        :root:not(.dark) #services {
+            background: var(--bg-secondary) !important;
+        }
+
+        :root:not(.dark) #about .from-dark-bg,
+        :root:not(.dark) #projects .from-dark-bg,
+        :root:not(.dark) #certificates .from-dark-card,
+        :root:not(.dark) #services .from-dark-bg {
+            --tw-gradient-from: var(--bg-secondary) !important;
+        }
+
+        :root:not(.dark) #about .to-dark-card,
+        :root:not(.dark) #projects .to-dark-card,
+        :root:not(.dark) #certificates .to-dark-bg,
+        :root:not(.dark) #services .to-dark-card {
+            --tw-gradient-to: var(--bg-secondary) !important;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6 lg:px-20 flex justify-between items-center">
+            <div class="flex items-center space-x-3 brand-container">
+                <div class="brand-photo-container cursor-pointer" onclick="openPhotoModal()">
+                    <img src="images/profile.jpg.jpg" alt="Mohsin Ali" class="w-12 h-12 rounded-full border-2 border-neon-cyan brand-photo" />
+                </div>
+                <div class="text-2xl font-bold brand-text">
+                    <span class="text-white">mohsin</span><span class="text-neon-cyan">.dev</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 text-lg">
+                <li><a href="#about" class="nav-link active hover:text-neon-cyan">About</a></li>
+                <li><a href="#technologies" class="nav-link hover:text-neon-cyan">Technologies</a></li>
+                <li><a href="#projects" class="nav-link hover:text-neon-cyan">Projects</a></li>
+                <li><a href="#certificates" class="nav-link hover:text-neon-cyan">Certificates</a></li>
+                <li><a href="#services" class="nav-link hover:text-neon-cyan">Services</a></li>
+                <li><a href="#contact" class="nav-link hover:text-neon-cyan">Contact</a></li>
+            </ul>
+
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="text-neon-cyan text-2xl hover:scale-110 transition-transform">
+                <i class="fas fa-moon"></i>
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-neon-cyan text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-card mt-4 mx-6 rounded-lg shadow-lg">
+            <ul class="flex flex-col space-y-4 p-6 text-lg">
+                <li><a href="#about" class="nav-link hover:text-neon-cyan">About</a></li>
+                <li><a href="#technologies" class="nav-link hover:text-neon-cyan">Technologies</a></li>
+                <li><a href="#projects" class="nav-link hover:text-neon-cyan">Projects</a></li>
+                <li><a href="#certificates" class="nav-link hover:text-neon-cyan">Certificates</a></li>
+                <li><a href="#services" class="nav-link hover:text-neon-cyan">Services</a></li>
+                <li><a href="#contact" class="nav-link hover:text-neon-cyan">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left Side Content -->
+                <div class="space-y-6 animate-fade-in">
+                    <h3 class="text-2xl md:text-3xl font-light text-gray-300">
+                        Hello, It's Me
+                    </h3>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                        Mohsin Ali
+                    </h1>
+                    
+                    <div class="text-2xl md:text-3xl font-medium">
+                        <div>
+                            <span class="text-gray-300">And I'm a </span>
+                            <span class="gradient-text">Freelance Developer</span>
+                        </div>
+                        <div class="mt-2">
+                            <span class="gradient-text">CS Student</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed max-w-xl">
+                        Computer Science student at IBA Sukkur, Pakistan. I specialize in building responsive websites and analyzing data using Python. Delivering clean UI designs and actionable insights for clients worldwide.
+                    </p>
+
+                    <!-- Social Icons -->
+                    <div class="flex space-x-4 pt-4">
+                        <a href="https://www.fiverr.com/" target="_blank" class="social-icon">
+                            <i class="fas fa-f"></i>
+                        </a>
+                        <a href="https://www.upwork.com/" target="_blank" class="social-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-6">
+                        <a href="#projects" class="btn-primary px-8 py-4 rounded-full text-lg font-semibold text-dark-bg">
+                            See My Work
+                        </a>
+                        <a href="cv.html" download="Mohsin_Ali_Resume.html" class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-neon-cyan">
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side - Hexagon Image -->
+                <div class="flex items-center justify-center animate-fade-in relative flex-col">
+                    <div class="hexagon-container cursor-pointer hexagon-pulse" onclick="openPhotoModal()">
+                        <div class="hexagon">
+                            <img src="images/profile.jpg.jpg" alt="Mohsin Ali" />
+                        </div>
+                    </div>
+                    <!-- Static Typing Text at Bottom -->
+                    <div style="margin-top: 20px;" class="text-center">
+                        <div class="text-neon-cyan font-semibold text-xl md:text-2xl">
+                            <span id="typing-text"></span><span class="typing-cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="min-h-screen flex items-center py-20 bg-gradient-to-b from-dark-bg to-dark-card">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-12 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    About <span class="gradient-text">Me</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neon-cyan to-blue-500 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Side - Introduction -->
+                <div class="space-y-6 animate-fade-in">
+                    <h3 class="text-3xl font-bold text-white">
+                        I'm <span class="gradient-text">Mohsin Ali</span>
+                    </h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        I'm Mohsin Ali, a Computer Science student at IBA Sukkur, Pakistan. I build responsive websites and analyze data using Python. I deliver clean UI and actionable insights. Available on Fiverr and Upwork.
+                    </p>
+                    
+                    <!-- Statistics or Additional Info -->
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="bg-dark-bg p-6 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan/50 transition-all">
+                            <h4 class="text-3xl font-bold gradient-text">4+</h4>
+                            <p class="text-gray-400 mt-2">Projects Completed</p>
+                        </div>
+                        <div class="bg-dark-bg p-6 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan/50 transition-all">
+                            <h4 class="text-3xl font-bold gradient-text">14+</h4>
+                            <p class="text-gray-400 mt-2">Certifications</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Key Roles -->
+                <div class="grid grid-cols-1 gap-4 animate-fade-in">
+                    <h3 class="text-2xl font-bold text-white mb-4">What I Do</h3>
+                    
+                    <!-- Role Card 1 -->
+                    <div class="flex items-start space-x-4 bg-dark-bg p-5 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan hover:shadow-lg hover:shadow-neon-cyan/20 transition-all">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-code text-dark-bg text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">Frontend Developer</h4>
+                            <p class="text-gray-400 text-sm">HTML, CSS, JavaScript, Tailwind CSS</p>
+                        </div>
+                    </div>
+
+                    <!-- Role Card 2 - Backend -->
+                    <div class="flex items-start space-x-4 bg-dark-bg p-5 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan hover:shadow-lg hover:shadow-neon-cyan/20 transition-all">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-server text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">Backend Developer</h4>
+                            <p class="text-gray-400 text-sm">Node.js, Express.js, MongoDB, Firebase</p>
+                        </div>
+                    </div>
+
+                    <!-- Role Card 3 - Full Stack -->
+                    <div class="flex items-start space-x-4 bg-dark-bg p-5 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan hover:shadow-lg hover:shadow-neon-cyan/20 transition-all">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-layer-group text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">Full Stack Developer</h4>
+                            <p class="text-gray-400 text-sm">MERN Stack, REST APIs, Authentication</p>
+                        </div>
+                    </div>
+
+                    <!-- Role Card 4 -->
+                    <div class="flex items-start space-x-4 bg-dark-bg p-5 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan hover:shadow-lg hover:shadow-neon-cyan/20 transition-all">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-line text-dark-bg text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">Data Analyst</h4>
+                            <p class="text-gray-400 text-sm">Python, Pandas, Matplotlib, NumPy</p>
+                        </div>
+                    </div>
+
+                    <!-- Role Card 5 -->
+                    <div class="flex items-start space-x-4 bg-dark-bg p-5 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan hover:shadow-lg hover:shadow-neon-cyan/20 transition-all">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-dark-bg text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">AI & Prompt Engineering</h4>
+                            <p class="text-gray-400 text-sm">Google Prompting, ChatGPT, AI Tools</p>
+                        </div>
+                    </div>
+
+                    <!-- Role Card 6 -->
+                    <div class="flex items-start space-x-4 bg-dark-bg p-5 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan hover:shadow-lg hover:shadow-neon-cyan/20 transition-all">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-briefcase text-dark-bg text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">Freelancer on Fiverr & Upwork</h4>
+                            <p class="text-gray-400 text-sm">Delivering quality projects worldwide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="min-h-screen flex items-center py-20 bg-dark-bg">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    My <span class="gradient-text">Technologies</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neon-cyan to-blue-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Technologies and tools I use to bring ideas to life
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Development Card -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg p-8 rounded-2xl border-2 border-neon-cyan/20 hover:border-neon-cyan hover:shadow-2xl hover:shadow-neon-cyan/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-palette text-3xl text-dark-bg"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4">Frontend Development</h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Building beautiful, responsive user interfaces with modern web technologies.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-dark-bg transition-all cursor-default">
+                            HTML5
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-dark-bg transition-all cursor-default">
+                            CSS3
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-dark-bg transition-all cursor-default">
+                            JavaScript
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-dark-bg transition-all cursor-default">
+                            Tailwind CSS
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-dark-bg transition-all cursor-default">
+                            Bootstrap 4
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-neon-cyan border border-neon-cyan/30 hover:bg-neon-cyan hover:text-dark-bg transition-all cursor-default">
+                            React.js
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Backend & APIs Card -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg p-8 rounded-2xl border-2 border-purple-500/20 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-server text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4">Backend & APIs</h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Creating robust server-side applications and RESTful APIs.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-purple-400 border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all cursor-default">
+                            Node.js
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-purple-400 border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all cursor-default">
+                            Express.js
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-purple-400 border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all cursor-default">
+                            REST APIs
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-purple-400 border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all cursor-default">
+                            JWT
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-purple-400 border border-purple-500/30 hover:bg-purple-500 hover:text-white transition-all cursor-default">
+                            Firebase
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Databases Card -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg p-8 rounded-2xl border-2 border-emerald-500/20 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-database text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4">Databases</h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Managing data with SQL and NoSQL database solutions.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500 hover:text-white transition-all cursor-default">
+                            MongoDB
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500 hover:text-white transition-all cursor-default">
+                            MySQL
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Python & Data Tools Card -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg p-8 rounded-2xl border-2 border-orange-500/20 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-line text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4">Python & Data Tools</h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Data analysis and visualization with Python libraries.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white transition-all cursor-default">
+                            Python
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white transition-all cursor-default">
+                            Pandas
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white transition-all cursor-default">
+                            NumPy
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white transition-all cursor-default">
+                            Matplotlib
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white transition-all cursor-default">
+                            Jupyter Notebook
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Dev Tools Card -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg p-8 rounded-2xl border-2 border-blue-500/20 hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-github text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4">Dev Tools</h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Version control and development productivity tools.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition-all cursor-default">
+                            Git
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition-all cursor-default">
+                            GitHub
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition-all cursor-default">
+                            GitHub Actions
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition-all cursor-default">
+                            VS Code
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white transition-all cursor-default">
+                            Copilot
+                        </span>
+                    </div>
+                </div>
+
+                <!-- AI Skills Card -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg p-8 rounded-2xl border-2 border-pink-500/20 hover:border-pink-500 hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-brain text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4">AI Skills</h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Leveraging AI for productivity and problem-solving.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-pink-400 border border-pink-500/30 hover:bg-pink-500 hover:text-white transition-all cursor-default">
+                            Prompt Engineering
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-pink-400 border border-pink-500/30 hover:bg-pink-500 hover:text-white transition-all cursor-default">
+                            Google Prompting
+                        </span>
+                        <span class="px-4 py-2 bg-dark-bg rounded-full text-sm text-pink-400 border border-pink-500/30 hover:bg-pink-500 hover:text-white transition-all cursor-default">
+                            ChatGPT
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="min-h-screen flex items-center py-20 bg-gradient-to-b from-dark-bg to-dark-card">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    My <span class="gradient-text">Projects</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neon-cyan to-blue-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Real-world projects showcasing my skills and expertise
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: Personal Portfolio -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl overflow-hidden border-2 border-neon-cyan/20 hover:border-neon-cyan hover:shadow-2xl hover:shadow-neon-cyan/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-48 bg-gradient-to-br from-neon-cyan/20 to-blue-500/20 flex items-center justify-center overflow-hidden relative">
+                        <i class="fas fa-user-circle text-7xl text-neon-cyan opacity-50 group-hover:scale-110 transition-transform"></i>
+                        <div class="absolute top-4 right-4 bg-neon-cyan text-dark-bg px-3 py-1 rounded-full text-xs font-bold">
+                            COMPLETED
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-neon-cyan transition-colors">
+                            Personal Portfolio
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 leading-relaxed h-16">
+                            Modern portfolio website with dark theme, smooth animations, contact form with EmailJS, and resume download.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-neon-cyan border border-neon-cyan/30">
+                                HTML5
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-neon-cyan border border-neon-cyan/30">
+                                Tailwind CSS
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-neon-cyan border border-neon-cyan/30">
+                                JavaScript
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-neon-cyan border border-neon-cyan/30">
+                                EmailJS
+                            </span>
+                        </div>
+                        
+                        <a href="index.html" class="block w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-dark-bg px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Quiz App -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl overflow-hidden border-2 border-yellow-500/20 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-48 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 flex items-center justify-center overflow-hidden relative">
+                        <i class="fas fa-brain text-7xl text-yellow-400 opacity-50 group-hover:scale-110 transition-transform"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-dark-bg px-3 py-1 rounded-full text-xs font-bold">
+                            COMPLETED
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-yellow-400 transition-colors">
+                            Quiz Application
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 leading-relaxed h-16">
+                            Interactive quiz app with multiple categories, user authentication, analytics dashboard, and admin panel.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-yellow-400 border border-yellow-500/30">
+                                JavaScript
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-yellow-400 border border-yellow-500/30">
+                                Firebase
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-yellow-400 border border-yellow-500/30">
+                                CSS3
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-yellow-400 border border-yellow-500/30">
+                                HTML5
+                            </span>
+                        </div>
+                        
+                        <a href="projects/projct_/index.html" target="_blank" class="block w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-dark-bg px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Weather App -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl overflow-hidden border-2 border-purple-500/20 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center overflow-hidden relative">
+                        <i class="fas fa-cloud-sun text-7xl text-purple-400 opacity-50 group-hover:scale-110 transition-transform"></i>
+                        <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            COMPLETED
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                            Weather Dashboard
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 leading-relaxed h-16">
+                            Real-time weather information using OpenWeather API with beautiful UI and location search.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-purple-400 border border-purple-500/30">
+                                JavaScript
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-purple-400 border border-purple-500/30">
+                                OpenWeather API
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-purple-400 border border-purple-500/30">
+                                CSS3
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-purple-400 border border-purple-500/30">
+                                HTML5
+                            </span>
+                        </div>
+                        
+                        <a href="projects/weather dashboard/index.html" target="_blank" class="block w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Data Dashboard -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl overflow-hidden border-2 border-emerald-500/20 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-48 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center overflow-hidden relative">
+                        <i class="fas fa-chart-line text-7xl text-emerald-400 opacity-50 group-hover:scale-110 transition-transform"></i>
+                        <div class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                            COMPLETED
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                            Data Analysis Dashboard
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 leading-relaxed h-16">
+                            Interactive data visualization tool with CSV upload, Python analysis, and Matplotlib charts.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-emerald-400 border border-emerald-500/30">
+                                Python
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-emerald-400 border border-emerald-500/30">
+                                Pandas
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-emerald-400 border border-emerald-500/30">
+                                Matplotlib
+                            </span>
+                            <span class="px-3 py-1 bg-dark-bg rounded-full text-xs text-emerald-400 border border-emerald-500/30">
+                                NumPy
+                            </span>
+                        </div>
+                        
+                        <a href="https://github.com/mosin1223/data-analysis-dashboard" target="_blank" class="block w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                            <i class="fab fa-github mr-2"></i>View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Divider / Section Title for Upcoming Projects -->
+                <div class="col-span-full mt-8 mb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent"></div>
+                        <h3 class="text-2xl font-bold text-white">
+                            <span class="text-yellow-500">Upcoming Projects</span>
+                        </h3>
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent"></div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 1: Personal Portfolio Website -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-briefcase text-6xl text-blue-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Personal Portfolio Website
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            A showcase portfolio to display projects, skills, and professional experience with modern design.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-blue-400 border border-slate-700">
+                                HTML
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-blue-400 border border-slate-700">
+                                Tailwind
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-blue-400 border border-slate-700">
+                                JavaScript
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-blue-400 border border-slate-700">
+                                CSS3
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 2: Multi-Section Landing Page -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-layer-group text-6xl text-purple-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Multi-Section Landing Page
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            A modern landing page with multiple sections, animations, and responsive design patterns.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-purple-400 border border-slate-700">
+                                HTML
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-purple-400 border border-slate-700">
+                                Tailwind
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-purple-400 border border-slate-700">
+                                JavaScript
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-purple-400 border border-slate-700">
+                                CSS3
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 3: Task Manager -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-tasks text-6xl text-emerald-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Task Manager
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            A full-stack task management app with CRUD operations, user authentication, and real-time updates.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-emerald-400 border border-slate-700">
+                                React
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-emerald-400 border border-slate-700">
+                                Node.js
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-emerald-400 border border-slate-700">
+                                MongoDB
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-emerald-400 border border-slate-700">
+                                Express
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 4: Contact Manager Dashboard -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-orange-500/10 to-red-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-address-book text-6xl text-orange-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Contact Manager Dashboard
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            A backend-powered dashboard for managing contacts with search, filter, and export features.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-orange-400 border border-slate-700">
+                                Node.js
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-orange-400 border border-slate-700">
+                                Express
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-orange-400 border border-slate-700">
+                                MongoDB
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-orange-400 border border-slate-700">
+                                React
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 5: Feedback Form + Auto Email -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-pink-500 hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-pink-500/10 to-rose-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-envelope text-6xl text-pink-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Feedback Form + Auto Email
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            An automated feedback form that sends email notifications using Nodemailer integration.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-pink-400 border border-slate-700">
+                                React
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-pink-400 border border-slate-700">
+                                Node.js
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-pink-400 border border-slate-700">
+                                Nodemailer
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-pink-400 border border-slate-700">
+                                Express
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 6: CSV Data Dashboard -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-indigo-500 hover:shadow-2xl hover:shadow-indigo-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-indigo-500/10 to-blue-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-chart-pie text-6xl text-indigo-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            CSV Data Dashboard
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            Upload CSV files and visualize data with interactive charts using Python data science tools.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-indigo-400 border border-slate-700">
+                                Python
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-indigo-400 border border-slate-700">
+                                Pandas
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-indigo-400 border border-slate-700">
+                                Matplotlib
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-indigo-400 border border-slate-700">
+                                NumPy
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 7: YouTube Analyzer -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-red-500 hover:shadow-2xl hover:shadow-red-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-red-500/10 to-orange-500/10 flex items-center justify-center relative">
+                        <i class="fab fa-youtube text-6xl text-red-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            YouTube Analyzer
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            Analyze YouTube channel statistics, views, and engagement metrics using YouTube Data API.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-red-400 border border-slate-700">
+                                Python
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-red-400 border border-slate-700">
+                                API
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-red-400 border border-slate-700">
+                                Data Scraping
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-red-400 border border-slate-700">
+                                Pandas
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Project 8: AI Prompt Library -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="h-40 bg-gradient-to-br from-cyan-500/10 to-teal-500/10 flex items-center justify-center relative">
+                        <i class="fas fa-lightbulb text-6xl text-cyan-400 opacity-40"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                            COMING SOON
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            AI Prompt Library
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed h-12">
+                            A curated library of AI prompts for various use cases with search and categorization features.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-cyan-400 border border-slate-700">
+                                HTML
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-cyan-400 border border-slate-700">
+                                JavaScript
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-cyan-400 border border-slate-700">
+                                Prompt Engineering
+                            </span>
+                            <span class="px-3 py-1 bg-slate-900 rounded-full text-xs text-cyan-400 border border-slate-700">
+                                CSS3
+                            </span>
+                        </div>
+                        
+                        <button disabled class="block w-full bg-slate-700 text-gray-500 px-4 py-2 rounded-lg font-semibold text-center cursor-not-allowed">
+                            Under Development
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="min-h-screen flex items-center py-20 bg-gradient-to-b from-dark-card to-dark-bg">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    My <span class="gradient-text">Certificates</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neon-cyan to-blue-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Professional certifications and achievements
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certificate 1: Python for Data Science -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-neon-cyan/20 hover:border-neon-cyan hover:shadow-2xl hover:shadow-neon-cyan/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-python text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neon-cyan transition-colors">
+                        Python for Data Science
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-neon-cyan"></i>Saylor Academy
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/phython.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-dark-bg px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 2: JavaScript Essential Training -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-yellow-500/20 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-js text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-yellow-500 transition-colors">
+                        JavaScript Essential Training
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-yellow-500"></i>LinkedIn Learning
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/CertificateOfCompletion_JavaScript%20Essential%20Training.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 3: Practical GitHub Actions -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-purple-500/20 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-github text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-purple-500 transition-colors">
+                        Practical GitHub Actions
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-purple-500"></i>LinkedIn Learning
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/CertificateOfCompletion_Practical%20GitHub%20Actions.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 4: HTML CSS and JavaScript Building the Web -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-emerald-500/20 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-code text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-500 transition-colors">
+                        HTML, CSS & JS: Building the Web
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-emerald-500"></i>LinkedIn Learning
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/CertificateOfCompletion_HTML%20CSS%20and%20JavaScript%20Building%20the%20Web.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 5: Introduction to Web Design and Development -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-blue-500/20 hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-laptop-code text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">
+                        Introduction to Web Design
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-blue-500"></i>LinkedIn Learning
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/CertificateOfCompletion_Introduction%20to%20Web%20Design%20and%20Development.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 6: Dreamweaver CC Responsive Design with Bootstrap 4 -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-orange-500/20 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-bootstrap text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-orange-500 transition-colors">
+                        Dreamweaver CC Responsive Design with Bootstrap 4
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-orange-500"></i>LinkedIn Learning
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/CertificateOfCompletion_Dreamweaver%20CC%20Responsive%20Design%20with%20Bootstrap%204.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 7: Practical GitHub Project Management and Collaboration -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-pink-500/20 hover:border-pink-500 hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-github text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-pink-500 transition-colors">
+                        Practical GitHub Project Management
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-pink-500"></i>LinkedIn Learning
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/CertificateOfCompletion_Practical%20GitHub%20Project%20Management%20and%20Collaboration.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 8: Coursera AI & Prompt Engineering -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-cyan-500/20 hover:border-cyan-500 hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-robot text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                        AI & Prompt Engineering
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-cyan-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%204ICDDTSON6HZ.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 9: Coursera Data Analysis -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-indigo-500/20 hover:border-indigo-500 hover:shadow-2xl hover:shadow-indigo-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-bar text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-500 transition-colors">
+                        Data Analysis Foundations
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-indigo-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%205XKS5WXQEN68.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 10: Coursera Machine Learning -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-green-500/20 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-lime-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-brain text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-green-500 transition-colors">
+                        Machine Learning Essentials
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-green-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%208KP4NXB9QMMC.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-green-500 to-lime-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 11: Coursera Cloud Computing -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-sky-500/20 hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-sky-500 to-blue-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-cloud text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-sky-500 transition-colors">
+                        Cloud Computing Fundamentals
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-sky-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%20CQMYLOTSZNC3.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-sky-500 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 12: Coursera API Development -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-amber-500/20 hover:border-amber-500 hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-plug text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-500 transition-colors">
+                        API Development & Integration
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-amber-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%20ESWSA20XTEVX.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 13: Coursera Database Management -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-red-500/20 hover:border-red-500 hover:shadow-2xl hover:shadow-red-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-database text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">
+                        Database Management Systems
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-red-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%20JNR3YWHXVYVD.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+
+                <!-- Certificate 14: Coursera Web Development -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-6 border-2 border-violet-500/20 hover:border-violet-500 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-globe text-3xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-violet-500 transition-colors">
+                        Full Stack Web Development
+                    </h3>
+                    
+                    <p class="text-gray-400 text-sm mb-1">
+                        <i class="fas fa-building mr-2 text-violet-500"></i>Coursera
+                    </p>
+                    
+                    <p class="text-gray-500 text-xs mb-4">
+                        <i class="fas fa-calendar mr-2"></i>2024
+                    </p>
+                    
+                    <a href="certificates/Coursera%20OLB6GX49LNWP.pdf" target="_blank" class="inline-block w-full bg-gradient-to-r from-violet-500 to-purple-500 text-white px-4 py-2 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-certificate mr-2"></i>View Certificate
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="min-h-screen flex items-center py-20 bg-gradient-to-b from-dark-bg to-dark-card">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    My <span class="gradient-text">Services</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neon-cyan to-blue-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Professional services I offer to bring your ideas to life
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Service 1: Frontend Development -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-8 border-2 border-neon-cyan/20 hover:border-neon-cyan hover:shadow-2xl hover:shadow-neon-cyan/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                        <i class="fas fa-palette text-4xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-neon-cyan transition-colors">
+                        Frontend Development
+                    </h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Create stunning, responsive user interfaces with modern frontend technologies. Beautiful designs that work flawlessly across all devices.
+                    </p>
+                    
+                    <ul class="text-gray-400 text-sm mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-cyan mr-2 mt-1"></i>
+                            <span>HTML, CSS, JavaScript & Tailwind</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-cyan mr-2 mt-1"></i>
+                            <span>Responsive & mobile-first design</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-cyan mr-2 mt-1"></i>
+                            <span>Interactive animations & effects</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#contact" class="inline-block w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-dark-bg px-6 py-3 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-arrow-right mr-2"></i>Get Started
+                    </a>
+                </div>
+
+                <!-- Service 2: Full Stack Development -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-8 border-2 border-emerald-500/20 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                        <i class="fas fa-code text-4xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-emerald-500 transition-colors">
+                        Full Stack Development
+                    </h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Build complete web applications from frontend to backend. Full-stack solutions with database integration and API development.
+                    </p>
+                    
+                    <ul class="text-gray-400 text-sm mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-2 mt-1"></i>
+                            <span>Frontend & Backend development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-2 mt-1"></i>
+                            <span>Database design & management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mr-2 mt-1"></i>
+                            <span>RESTful API development</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#contact" class="inline-block w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-arrow-right mr-2"></i>Get Started
+                    </a>
+                </div>
+
+                <!-- Service 3: Data Analysis -->
+                <div class="group bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-8 border-2 border-purple-500/20 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105 animate-fade-in">
+                    <div class="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                        <i class="fas fa-chart-line text-4xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-purple-500 transition-colors">
+                        Data Analysis
+                    </h3>
+                    
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Transform raw data into actionable insights using Python, Pandas, and visualization tools. Data cleaning, analysis, and interactive dashboards.
+                    </p>
+                    
+                    <ul class="text-gray-400 text-sm mb-6 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mr-2 mt-1"></i>
+                            <span>Data cleaning & preprocessing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mr-2 mt-1"></i>
+                            <span>Statistical analysis & reporting</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mr-2 mt-1"></i>
+                            <span>Interactive data visualizations</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#contact" class="inline-block w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold text-center hover:scale-105 transition-transform">
+                        <i class="fas fa-arrow-right mr-2"></i>Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="min-h-screen flex items-center py-20 bg-gradient-to-b from-dark-card to-dark-bg">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Get In <span class="gradient-text">Touch</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-neon-cyan to-blue-500 mx-auto mb-4"></div>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Have a project in mind? Let's work together to bring your ideas to life
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-br from-dark-card to-dark-bg rounded-2xl p-8 md:p-12 border-2 border-neon-cyan/20 hover:border-neon-cyan transition-all duration-300 shadow-2xl">
+                    <form id="contactForm" class="space-y-6">
+                        <!-- Name Field -->
+                        <div class="animate-fade-in">
+                            <label for="name" class="block text-white text-sm font-semibold mb-2">
+                                <i class="fas fa-user mr-2 text-neon-cyan"></i>Your Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required
+                                class="w-full px-4 py-3 bg-dark-bg border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                                placeholder="Enter your full name"
+                            >
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="animate-fade-in">
+                            <label for="email" class="block text-white text-sm font-semibold mb-2">
+                                <i class="fas fa-envelope mr-2 text-neon-cyan"></i>Your Email
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                class="w-full px-4 py-3 bg-dark-bg border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                                placeholder="your.email@example.com"
+                            >
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="animate-fade-in">
+                            <label for="message" class="block text-white text-sm font-semibold mb-2">
+                                <i class="fas fa-comment-dots mr-2 text-neon-cyan"></i>Your Message
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="6" 
+                                required
+                                class="w-full px-4 py-3 bg-dark-bg border-2 border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 transition-all resize-none"
+                                placeholder="Tell me about your project or inquiry..."
+                            ></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="animate-fade-in">
+                            <button 
+                                type="submit"
+                                class="w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-dark-bg px-8 py-4 rounded-lg font-bold text-lg hover:scale-105 transition-transform shadow-lg hover:shadow-neon-cyan/50"
+                            >
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </div>
+
+                        <!-- Success Message (Hidden by default) -->
+                        <div id="successMessage" class="hidden bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border-2 border-emerald-500 text-emerald-400 px-6 py-4 rounded-lg text-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>Message sent successfully! I'll get back to you soon.</span>
+                        </div>
+
+                        <!-- Error Message (Hidden by default) -->
+                        <div id="errorMessage" class="hidden bg-gradient-to-r from-red-500/20 to-pink-500/20 border-2 border-red-500 text-red-400 px-6 py-4 rounded-lg text-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i>
+                            <span>Oops! Something went wrong. Please try again.</span>
+                        </div>
+                    </form>
+
+                    <!-- Contact Info -->
+                    <div class="mt-12 pt-8 border-t border-gray-700">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
+                            <a href="mailto:cadetmohsan@gmail.com" class="group block">
+                                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-neon-cyan to-blue-500 rounded-full mx-auto mb-3 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <h4 class="text-white font-semibold mb-1">Email</h4>
+                                <p class="text-gray-400 hover:text-neon-cyan transition-colors text-sm">
+                                    Contact Me
+                                </p>
+                            </a>
+
+                            <a href="https://www.fiverr.com/mohsi88" target="_blank" class="group block">
+                                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full mx-auto mb-3 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fas fa-briefcase text-white"></i>
+                                </div>
+                                <h4 class="text-white font-semibold mb-1">Fiverr</h4>
+                                <p class="text-gray-400 hover:text-green-400 transition-colors text-sm">
+                                    Hire on Fiverr
+                                </p>
+                            </a>
+
+                            <a href="https://www.upwork.com/freelancers/~01607a29b1aba680d1" target="_blank" class="group block">
+                                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full mx-auto mb-3 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fas fa-laptop-code text-white"></i>
+                                </div>
+                                <h4 class="text-white font-semibold mb-1">Upwork</h4>
+                                <p class="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                                    Hire on Upwork
+                                </p>
+                            </a>
+
+                            <a href="https://github.com/mosin1223" target="_blank" class="group block">
+                                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto mb-3 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fab fa-github text-white"></i>
+                                </div>
+                                <h4 class="text-white font-semibold mb-1">GitHub</h4>
+                                <p class="text-gray-400 hover:text-purple-400 transition-colors text-sm">
+                                    @mosin1223
+                                </p>
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/mohsin-ali-54a9b2319/" target="_blank" class="group block">
+                                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full mx-auto mb-3 group-hover:scale-110 transition-transform cursor-pointer">
+                                    <i class="fab fa-linkedin text-white"></i>
+                                </div>
+                                <h4 class="text-white font-semibold mb-1">LinkedIn</h4>
+                                <p class="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                                    Connect
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-card border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6 lg:px-20">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 <span class="text-neon-cyan font-semibold">Mohsin Ali</span>. All rights reserved.
+                    </p>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="https://www.fiverr.com/mohsi88" target="_blank" class="text-gray-400 hover:text-neon-cyan transition-colors">
+                        <i class="fas fa-briefcase text-xl"></i>
+                    </a>
+                    <a href="https://www.upwork.com/freelancers/~01607a29b1aba680d1" target="_blank" class="text-gray-400 hover:text-neon-cyan transition-colors">
+                        <i class="fas fa-laptop-code text-xl"></i>
+                    </a>
+                    <a href="https://github.com/mosin1223" target="_blank" class="text-gray-400 hover:text-neon-cyan transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohsin-ali-54a9b2319/" target="_blank" class="text-gray-400 hover:text-neon-cyan transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Photo Modal -->
+    <div id="photoModal" class="photo-modal" onclick="closePhotoModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-photo" src="images/profile1.jpg.jpeg" alt="Mohsin Ali" onclick="event.stopPropagation()">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

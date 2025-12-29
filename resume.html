@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohsin Ali - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .resume-container {
+            display: flex;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Left Sidebar */
+        .sidebar {
+            width: 35%;
+            background: linear-gradient(180deg, #3d4e5f 0%, #4a5d6f 100%);
+            color: white;
+            padding: 40px 30px;
+        }
+        
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #7fa3c4;
+            color: #7fa3c4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-section {
+            margin-bottom: 35px;
+        }
+        
+        .contact-item {
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        .contact-item a {
+            color: #7fa3c4;
+            text-decoration: none;
+            word-break: break-word;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 35px;
+        }
+        
+        .sidebar-section h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .sidebar-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-section li {
+            padding: 6px 0;
+            padding-left: 15px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .sidebar-section li:before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #7fa3c4;
+            font-size: 16px;
+        }
+        
+        .cert-item-sidebar {
+            margin-bottom: 12px;
+            font-size: 12px;
+            padding-left: 15px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .cert-item-sidebar:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #7fa3c4;
+            font-weight: bold;
+        }
+        
+        /* Right Main Content */
+        .main-content {
+            width: 65%;
+            padding: 40px 35px;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3d4e5f;
+        }
+        
+        .header h1 {
+            font-size: 34px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .header .tagline {
+            font-size: 15px;
+            color: #34495e;
+            font-weight: 600;
+            font-style: italic;
+        }
+        
+        .header .location {
+            font-size: 13px;
+            color: #95a5a6;
+            margin-top: 5px;
+        }
+        
+        .main-section {
+            margin-bottom: 30px;
+        }
+        
+        .main-section h2 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3d4e5f;
+            text-transform: uppercase;
+        }
+        
+        .summary-text {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #34495e;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+        
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+        }
+        
+        .experience-header {
+            margin-bottom: 8px;
+        }
+        
+        .experience-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .experience-subtitle {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .experience-date {
+            font-size: 12px;
+            color: #95a5a6;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        
+        .experience-description {
+            font-size: 13px;
+            color: #34495e;
+            line-height: 1.7;
+            margin-left: 15px;
+        }
+        
+        .experience-description li {
+            margin-bottom: 5px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .resume-container {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="contact-section">
+                <h2>Contact</h2>
+                <div class="contact-item">
+                    📍 IBA Sukkur, Sindh, Pakistan
+                </div>
+                <div class="contact-item">
+                    📞 03147159237<br>(Mobile)
+                </div>
+                <div class="contact-item">
+                    📧 <a href="mailto:cadetmohsan@gmail.com">cadetmohsan@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    🔗 <a href="https://github.com/mosin1223">github.com/mosin1223</a>
+                </div>
+                <div class="contact-item">
+                    💼 <a href="https://www.linkedin.com/in/mohsin-ali-54a9b2319/">LinkedIn</a>
+                </div>
+                <div class="contact-item">
+                    🎯 <a href="https://www.fiverr.com/sellers/mohsi88/edit">Fiverr</a>
+                </div>
+                <div class="contact-item">
+                    ⚡ <a href="https://www.upwork.com/freelancers/~01607a29b1aba680d1">Upwork</a>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Top Skills</h2>
+                <ul>
+                    <li>Python (Programming Language)</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>React.js</li>
+                    <li>Node.js & Express</li>
+                    <li>HTML5 & CSS3</li>
+                    <li>Tailwind CSS</li>
+                    <li>Data Analysis</li>
+                    <li>Problem Solving</li>
+                    <li>MongoDB & Databases</li>
+                    <li>Git & GitHub</li>
+                    <li>RESTful APIs</li>
+                    <li>Artificial Intelligence (AI)</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Languages</h2>
+                <ul>
+                    <li><strong>Urdu</strong><br>Professional Working</li>
+                    <li><strong>English</strong><br>Full Professional</li>
+                    <li><strong>Sindhi</strong><br>Native or Bilingual</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Certifications</h2>
+                <div class="cert-item-sidebar">Second place in scifi and project expo</div>
+                <div class="cert-item-sidebar">AI Python for Beginners</div>
+                <div class="cert-item-sidebar">JavaScript Essential Training</div>
+                <div class="cert-item-sidebar">HTML, CSS & JavaScript Building the Web</div>
+                <div class="cert-item-sidebar">Practical GitHub Actions</div>
+                <div class="cert-item-sidebar">Web Design & Development</div>
+                <div class="cert-item-sidebar">Python Programming</div>
+                <div class="cert-item-sidebar">Bootstrap 4 Responsive Design</div>
+                <div class="cert-item-sidebar">GitHub Project Management</div>
+                <div class="cert-item-sidebar">Multiple Coursera Certificates (7)</div>
+            </div>
+        </div>
+
+        <!-- Right Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Mohsin Ali</h1>
+                <div class="tagline">Developer of Software | Innovating One Line of Code at a Time</div>
+                <div class="location">Khairpur District, Sindh, Pakistan</div>
+            </div>
+
+            <div class="main-section">
+                <h2>Summary</h2>
+                <p class="summary-text">
+                    As a dedicated student at Sukkur IBA University, my journey in Computer Science is shaping my 
+                    analytical and coding competencies, particularly in Java, C#, JavaScript, Python, and Java Swing. 
+                    These tools are the cornerstone of my educational experience, as I navigate through complex 
+                    problem-solving tasks and academic projects.
+                </p>
+                <p class="summary-text">
+                    While my formal education continues through to 2027, my goal is to intertwine my classroom 
+                    learning with practical applications. The aspiration to become a computer scientist drives me 
+                    to seek opportunities that will bolster my current knowledge and prepare me for the dynamic 
+                    tech landscape. Proficient in modern web technologies including React, Node.js, and Python, 
+                    I am experienced in building responsive, user-friendly applications with a focus on clean code 
+                    and exceptional user experience.
+                </p>
+            </div>
+
+            <div class="main-section">
+                <h2>Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Freelance Full Stack Developer & Data Analyst</div>
+                    </div>
+                    <div class="experience-subtitle">Fiverr & Upwork</div>
+                    <div class="experience-date">2023 - Present</div>
+                    <ul class="experience-description">
+                        <li>Developing and deploying responsive websites using HTML, CSS, JavaScript, React, and Tailwind CSS</li>
+                        <li>Building interactive data dashboards and visualizations using Python libraries like Matplotlib, Seaborn, and Plotly</li>
+                        <li>Designing and training machine learning models for predictive data analysis and business intelligence</li>
+                        <li>Collaborating effectively with clients to deliver high-quality projects with 100% client satisfaction</li>
+                        <li>Specialized in frontend development, full-stack applications, and data-driven solutions</li>
+                        <li>Managing multiple projects simultaneously while maintaining code quality and meeting deadlines</li>
+                        <li>Providing technical consultation and recommendations to clients for optimal solutions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Education</h2>
+                
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Sukkur IBA University</div>
+                    </div>
+                    <div class="experience-subtitle">Bachelor of Science, Computer Science</div>
+                    <div class="experience-date">(2023 - 2027)</div>
+                    <ul class="experience-description">
+                        <li>Focused on software development, data structures, algorithms, database management, and web technologies</li>
+                        <li>Active participation in coding competitions and tech communities</li>
+                        <li>Completed coursework in Java, C#, Python, Object-Oriented Programming, and Data Structures</li>
+                        <li>Engaged in academic projects involving AI, machine learning, and web development</li>
+                    </ul>
+                </div>
+
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">IBA IET Khp</div>
+                    </div>
+                    <div class="experience-subtitle">DIT, Computer Science</div>
+                    <div class="experience-date">(January 2022 - December 2022)</div>
+                    <ul class="experience-description">
+                        <li>Completed Diploma in Information Technology with focus on Computer Science fundamentals</li>
+                        <li>Gained foundational knowledge in programming, databases, and web technologies</li>
+                    </ul>
+                </div>
+
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Pak-turk International Schools and Colleges</div>
+                    </div>
+                    <div class="experience-subtitle">Higher Secondary, Computer Science</div>
+                    <div class="experience-date">(August 2020 - May 2022)</div>
+                    <ul class="experience-description">
+                        <li>Studied advanced computer science concepts and programming fundamentals</li>
+                        <li>Developed strong analytical and problem-solving skills</li>
+                    </ul>
+                </div>
+
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Cadet College Larkana</div>
+                    </div>
+                    <div class="experience-subtitle">Matriculation (SSC) & Intermediate (HSSC), Computer Science</div>
+                    <div class="experience-date">(2019 - 2022)</div>
+                    <div class="experience-subtitle">Larkana, Sindh, Pakistan</div>
+                    <ul class="experience-description">
+                        <li>Completed Matriculation and Intermediate education with specialization in Computer Science</li>
+                        <li>Built strong foundation in mathematics, physics, and computer programming</li>
+                        <li>Developed leadership skills through cadet training and discipline</li>
+                        <li>Participated in academic competitions and extracurricular activities</li>
+                    </ul>
+                </div>
+
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Bahria Foundation College</div>
+                    </div>
+                    <div class="experience-subtitle">Secondary School, Computer Science</div>
+                    <div class="experience-date">(August 2018 - May 2020) · 1 year 10 months</div>
+                    <div class="experience-subtitle">Khairpur District, Sindh, Pakistan</div>
+                    <ul class="experience-description">
+                        <li>Completed secondary education with specialization in Computer Science</li>
+                        <li>Built foundation in programming logic and computational thinking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Featured Projects</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Personal Portfolio Website</div>
+                    </div>
+                    <div class="experience-subtitle">HTML5, CSS3, JavaScript, Tailwind CSS, EmailJS</div>
+                    <ul class="experience-description">
+                        <li>Designed and developed a modern, responsive portfolio website featuring smooth animations and interactive UI components</li>
+                        <li>Integrated contact form with EmailJS for direct client communication without backend requirements</li>
+                        <li>Showcased projects, certificates, and professional services with an elegant dark theme design</li>
+                        <li>Implemented scroll animations and dynamic content loading for enhanced user experience</li>
+                        <li>Optimized for all device sizes with mobile-first responsive design approach</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Weather Application</div>
+                    </div>
+                    <div class="experience-subtitle">React.js, API Integration, Responsive Design</div>
+                    <ul class="experience-description">
+                        <li>Built a real-time weather application that fetches data from external APIs</li>
+                        <li>Displayed current weather conditions with a clean, intuitive interface</li>
+                        <li>Implemented location-based weather updates and 5-day weather forecasts</li>
+                        <li>Created reusable React components for scalability and maintainability</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Data Dashboard</div>
+                    </div>
+                    <div class="experience-subtitle">Python, Pandas, Matplotlib, Seaborn, Data Visualization</div>
+                    <ul class="experience-description">
+                        <li>Created an interactive data dashboard for visualizing complex datasets with charts and graphs</li>
+                        <li>Implemented data processing pipelines using Pandas for efficient data manipulation</li>
+                        <li>Added interactive filtering capabilities for enhanced data exploration</li>
+                        <li>Utilized various visualization libraries to present insights effectively</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Technical Skills & Tools</h2>
+                <p class="summary-text">
+                    <strong>Frontend Development:</strong> HTML5, CSS3, JavaScript (ES6+), React.js, Tailwind CSS, Bootstrap 4, Responsive Design, UI/UX Design<br><br>
+                    <strong>Backend Development:</strong> Node.js, Express.js, Python, RESTful APIs, API Integration<br><br>
+                    <strong>Programming Languages:</strong> JavaScript, Python, Java, C#<br><br>
+                    <strong>Databases:</strong> MongoDB, Database Management, SQL Basics<br><br>
+                    <strong>Data Analysis:</strong> Python, Pandas, NumPy, Matplotlib, Seaborn, Data Visualization<br><br>
+                    <strong>Tools & Technologies:</strong> Git, GitHub, VS Code, Postman, GitHub Actions, EmailJS, Jupyter Notebook<br><br>
+                    <strong>Soft Skills:</strong> Problem Solving, Analytical Thinking, Client Communication, Project Management, Time Management
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

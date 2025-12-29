@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">🌙</button>
+    </div>
+    
+    <div class="user-avatar-top">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23cbd5e0'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Avatar" class="user-avatar" id="userAvatar">
+    </div>
+
+    <div class="container">
+        <div class="result-container">
+            <div class="result-header">
+                <h1>Quiz Completed! 🎉</h1>
+                <p class="category-name" id="categoryName">Category</p>
+            </div>
+
+            <div class="result-card">
+                <div class="result-score">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="90" class="circle-bg"></circle>
+                            <circle cx="100" cy="100" r="90" class="circle-progress" id="scoreCircle"></circle>
+                        </svg>
+                        <div class="score-text">
+                            <span class="score-value" id="scoreValue">0</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-details">
+                    <div class="result-item">
+                        <span class="result-label">Total Questions:</span>
+                        <span class="result-value" id="totalQuestions">10</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Correct Answers:</span>
+                        <span class="result-value result-correct" id="correctAnswers">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Wrong Answers:</span>
+                        <span class="result-value result-wrong" id="wrongAnswers">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Percentage:</span>
+                        <span class="result-value" id="percentage">0%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time Taken:</span>
+                        <span class="result-value" id="timeTaken">0s</span>
+                    </div>
+                </div>
+
+                <div class="performance-message" id="performanceMessage">
+                    <!-- Dynamic message based on score -->
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn btn-primary" id="downloadPdfBtn">📄 Download PDF</button>
+                <button class="btn btn-primary" id="playAgainBtn">Play Again</button>
+                <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+   
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase.js"></script>
+    <script src="auth.js"></script>
+    <script>
+       
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+            } else {
+                
+                db.collection('users').doc(user.uid).get()
+                    .then((doc) => {
+                        if (doc.exists && doc.data().avatar) {
+                            document.getElementById('userAvatar').src = doc.data().avatar;
+                        }
+                    });
+            }
+        });
+
+        
+        const results = JSON.parse(sessionStorage.getItem('quizResults'));
+        
+        if (!results) {
+            window.location.href = 'index.html';
+        } else {
+            displayResults(results);
+            saveResultsToFirestore(results);
+        }
+
+        function displayResults(results) {
+            document.getElementById('categoryName').textContent = results.category;
+            document.getElementById('totalQuestions').textContent = results.totalQuestions;
+            document.getElementById('correctAnswers').textContent = results.correctAnswers;
+            document.getElementById('wrongAnswers').textContent = results.wrongAnswers;
+            document.getElementById('scoreValue').textContent = results.score;
+            document.getElementById('percentage').textContent = results.percentage + '%';
+            document.getElementById('timeTaken').textContent = results.timeTaken + 's';
+
+            
+            const circle = document.getElementById('scoreCircle');
+            const percentage = results.percentage;
+            const circumference = 2 * Math.PI * 90;
+            const offset = circumference - (percentage / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+
+            // Display performance message
+            const message = document.getElementById('performanceMessage');
+            if (percentage >= 80) {
+                message.innerHTML = '🌟 Excellent! You did amazing!';
+                message.className = 'performance-message excellent';
+            } else if (percentage >= 60) {
+                message.innerHTML = '👍 Good job! Keep it up!';
+                message.className = 'performance-message good';
+            } else if (percentage >= 40) {
+                message.innerHTML = '📚 Not bad! Practice more!';
+                message.className = 'performance-message average';
+            } else {
+                message.innerHTML = '💪 Keep learning! You can do better!';
+                message.className = 'performance-message poor';
+            }
+        }
+
+        async function saveResultsToFirestore(results) {
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    await db.collection('users').doc(user.uid).collection('results').add({
+                        category: results.category,
+                        score: results.score,
+                        totalQuestions: results.totalQuestions,
+                        correctAnswers: results.correctAnswers,
+                        wrongAnswers: results.wrongAnswers,
+                        percentage: results.percentage,
+                        timeTaken: results.timeTaken,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    console.log('Results saved successfully');
+                } catch (error) {
+                    console.error('Error saving results:', error);
+                }
+            }
+        }
+
+
+        document.getElementById('playAgainBtn').addEventListener('click', () => {
+            sessionStorage.removeItem('quizResults');
+            window.location.href = 'index.html';
+        });
+
+        
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                sessionStorage.removeItem('quizResults');
+                window.location.href = 'login.html';
+            });
+        });
+
+        
+        document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+            await generatePDF();
+        });
+
+        
+        async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const user = auth.currentUser;
+            let userName = 'User';
+            let avatarDataURL = null;
+
+            
+            if (user) {
+                try {
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                        userName = userData.name;
+                        
+                        
+                        if (userData.avatar) {
+                            avatarDataURL = await imageUrlToBase64(userData.avatar);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
+            }
+
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 20;
+            const centerX = pageWidth / 2;
+            let currentY = margin;
+
+            
+            const primaryColor = [66, 153, 225]; 
+            const successColor = [72, 187, 120]; 
+            const errorColor = [245, 101, 101]; 
+            const textColor = [45, 55, 72]; 
+            const grayColor = [113, 128, 150]; 
+
+            
+            doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.rect(0, 0, pageWidth, 50, 'F');
+
+            
+            doc.setFontSize(24);
+            doc.setTextColor(255, 255, 255);
+            doc.setFont(undefined, 'bold');
+            doc.text('📊 Quiz App', centerX, 20, { align: 'center' });
+            
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'normal');
+            doc.text('Quiz Result Certificate', centerX, 35, { align: 'center' });
+
+            currentY = 60;
+
+            
+            if (avatarDataURL) {
+                try {
+                    doc.addImage(avatarDataURL, 'JPEG', centerX - 20, currentY, 40, 40, undefined, 'FAST');
+                    currentY += 50;
+                } catch (error) {
+                    console.error('Error adding avatar to PDF:', error);
+                    currentY += 10;
+                }
+            } else {
+                
+                doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+                doc.circle(centerX, currentY + 20, 20, 'F');
+                doc.setFontSize(30);
+                doc.setTextColor(255, 255, 255);
+                doc.text(userName.charAt(0).toUpperCase(), centerX, currentY + 27, { align: 'center' });
+                currentY += 50;
+            }
+
+            
+            doc.setFontSize(18);
+            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text(userName, centerX, currentY, { align: 'center' });
+            currentY += 15;
+
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            doc.setFontSize(10);
+            doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+            doc.setFont(undefined, 'normal');
+            doc.text(`${dateStr} at ${timeStr}`, centerX, currentY, { align: 'center' });
+            currentY += 20;
+
+            
+            doc.setDrawColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.setLineWidth(0.5);
+            doc.line(margin, currentY, pageWidth - margin, currentY);
+            currentY += 15;
+
+            
+            doc.setFontSize(14);
+            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text('Category', centerX, currentY, { align: 'center' });
+            currentY += 8;
+
+            doc.setFontSize(16);
+            doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.text(results.category, centerX, currentY, { align: 'center' });
+            currentY += 20;
+
+    
+            const boxWidth = 80;
+            const boxHeight = 50;
+            const boxX = centerX - boxWidth / 2;
+            
+            
+            const percentage = results.percentage;
+            if (percentage >= 80) {
+                doc.setFillColor(successColor[0], successColor[1], successColor[2]);
+            } else if (percentage >= 60) {
+                doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            } else {
+                doc.setFillColor(errorColor[0], errorColor[1], errorColor[2]);
+            }
+            
+            doc.roundedRect(boxX, currentY, boxWidth, boxHeight, 5, 5, 'F');
+            
+            
+            doc.setFontSize(36);
+            doc.setTextColor(255, 255, 255);
+            doc.setFont(undefined, 'bold');
+            doc.text(results.score.toString(), centerX, currentY + 25, { align: 'center' });
+            
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'normal');
+            doc.text(`${percentage}%`, centerX, currentY + 40, { align: 'center' });
+            currentY += boxHeight + 20;
+
+            
+            doc.setFontSize(14);
+            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text('Quiz Details', centerX, currentY, { align: 'center' });
+            currentY += 12;
+
+            
+            const detailsX = margin + 10;
+            const detailsWidth = pageWidth - 2 * margin - 20;
+            const lineHeight = 12;
+
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+
+            
+            doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+            doc.text('Total Questions:', detailsX, currentY);
+            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text(results.totalQuestions.toString(), pageWidth - margin - 10, currentY, { align: 'right' });
+            currentY += lineHeight;
+
+            
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+            doc.text('Correct Answers:', detailsX, currentY);
+            doc.setTextColor(successColor[0], successColor[1], successColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text(results.correctAnswers.toString(), pageWidth - margin - 10, currentY, { align: 'right' });
+            currentY += lineHeight;
+
+            
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+            doc.text('Wrong Answers:', detailsX, currentY);
+            doc.setTextColor(errorColor[0], errorColor[1], errorColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text(results.wrongAnswers.toString(), pageWidth - margin - 10, currentY, { align: 'right' });
+            currentY += lineHeight;
+
+            
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+            doc.text('Time Taken:', detailsX, currentY);
+            doc.setTextColor(textColor[0], textColor[1], textColor[2]);
+            doc.setFont(undefined, 'bold');
+            doc.text(`${results.timeTaken}s`, pageWidth - margin - 10, currentY, { align: 'right' });
+            currentY += lineHeight + 5;
+
+            
+            currentY += 10;
+            let performanceMsg = '';
+            let performanceBg = primaryColor;
+            
+            if (percentage >= 80) {
+                performanceMsg = '🌟 Excellent! Outstanding Performance!';
+                performanceBg = successColor;
+            } else if (percentage >= 60) {
+                performanceMsg = '👍 Good Job! Keep It Up!';
+                performanceBg = primaryColor;
+            } else if (percentage >= 40) {
+                performanceMsg = '📚 Not Bad! Practice More!';
+                performanceBg = [237, 137, 54]; 
+            } else {
+                performanceMsg = '💪 Keep Learning! You Can Do Better!';
+                performanceBg = errorColor;
+            }
+
+            doc.setFillColor(performanceBg[0], performanceBg[1], performanceBg[2]);
+            doc.roundedRect(margin, currentY, pageWidth - 2 * margin, 20, 3, 3, 'F');
+            
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.setFont(undefined, 'bold');
+            doc.text(performanceMsg, centerX, currentY + 13, { align: 'center' });
+
+            
+            currentY = pageHeight - 20;
+            doc.setFontSize(8);
+            doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+            doc.setFont(undefined, 'normal');
+            doc.text('Generated by Quiz App - Keep Learning, Keep Growing!', centerX, currentY, { align: 'center' });
+
+            
+            const filename = `Quiz_Result_${results.category.replace(/\s+/g, '_')}_${dateStr.replace(/\s+/g, '_')}.pdf`;
+            doc.save(filename);
+        }
+
+        
+        async function imageUrlToBase64(url) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            } catch (error) {
+                console.error('Error converting image to base64:', error);
+                return null;
+            }
+        }
+    </script>
+</body>
+</html>

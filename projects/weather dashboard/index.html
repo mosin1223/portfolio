@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fas fa-cloud-sun"></i>
+            <span>Weather</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" title="Weather">
+                <i class="fas fa-cloud-sun"></i>
+            </a>
+            <a href="#" class="nav-item" title="Map">
+                <i class="fas fa-map"></i>
+            </a>
+            <a href="#" class="nav-item" title="Calendar">
+                <i class="fas fa-calendar-alt"></i>
+            </a>
+            <a href="#" class="nav-item" title="Charts">
+                <i class="fas fa-chart-line"></i>
+            </a>
+            <a href="#" class="nav-item" title="Moon Phase">
+                <i class="fas fa-moon"></i>
+            </a>
+            <a href="#" class="nav-item" title="Settings">
+                <i class="fas fa-cog"></i>
+            </a>
+        </nav>
+        <div class="nav-bottom">
+            <a href="#" class="nav-item" title="Power">
+                <i class="fas fa-power-off"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Search Header -->
+        <header class="header">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="cityInput" class="search-input" placeholder="Search for cities..." autocomplete="off">
+                <div id="suggestionsBox" class="suggestions-box"></div>
+                <button id="searchBtn" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="header-right">
+                <span class="today-highlight">Today's Highlight</span>
+            </div>
+        </header>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p>Fetching weather data...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="error-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p id="errorMessage">City not found. Please try again.</p>
+            <button id="retryBtn" class="retry-btn">Try Again</button>
+        </div>
+
+        <!-- Weather Content -->
+        <div id="weatherContent" class="weather-content active-view">
+            <!-- Current Weather Section -->
+            <section class="current-weather">
+                <div class="weather-main-card glass-card">
+                    <div class="temperature-display">
+                        <div class="weather-icon-large">
+                            <i id="mainWeatherIcon" class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div class="temp-wrapper">
+                            <h1 id="currentTemp" class="temperature">28°C</h1>
+                            <p id="weatherDescription" class="weather-desc">Partly Cloudy</p>
+                        </div>
+                    </div>
+                    <div class="location-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="cityName">Mumbai, IN</span>
+                    </div>
+                    <div class="date-time">
+                        <i class="far fa-calendar"></i>
+                        <span id="currentDate">24 July 2023, 5:42 AM</span>
+                    </div>
+                </div>
+
+                <!-- Today's Highlights -->
+                <div class="highlights-grid">
+                    <div class="highlight-card glass-card">
+                        <h3>Wind Status</h3>
+                        <div class="highlight-value">
+                            <span id="windSpeed" class="value">7.90</span>
+                            <span class="unit">km/h</span>
+                        </div>
+                        <div class="wind-chart" id="windChart">
+                            <canvas id="windCanvas"></canvas>
+                        </div>
+                        <p class="sub-info" id="windDirection">WSW</p>
+                    </div>
+
+                    <div class="highlight-card glass-card">
+                        <h3>UV Index</h3>
+                        <div class="highlight-value">
+                            <span id="uvIndex" class="value">5.50</span>
+                        </div>
+                        <div class="uv-gauge" id="uvGauge">
+                            <svg viewBox="0 0 100 50">
+                                <path d="M 10 45 A 40 40 0 0 1 90 45" fill="none" stroke="#2a3f5f" stroke-width="8"/>
+                                <path id="uvPath" d="M 10 45 A 40 40 0 0 1 90 45" fill="none" stroke="url(#uvGradient)" stroke-width="8" stroke-dasharray="126" stroke-dashoffset="63"/>
+                                <defs>
+                                    <linearGradient id="uvGradient" x1="0%" y1="0%" x2="100%">
+                                        <stop offset="0%" style="stop-color:#4facfe"/>
+                                        <stop offset="100%" style="stop-color:#00f2fe"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="highlight-card glass-card">
+                        <h3>Humidity</h3>
+                        <div class="highlight-value">
+                            <span id="humidity" class="value">84</span>
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="humidity-bar">
+                            <div id="humidityFill" class="humidity-fill" style="width: 84%"></div>
+                        </div>
+                        <p class="sub-info" id="humidityStatus">Normal</p>
+                    </div>
+
+                    <div class="highlight-card glass-card">
+                        <h3>Visibility</h3>
+                        <div class="highlight-value">
+                            <span id="visibility" class="value">03</span>
+                            <span class="unit">km</span>
+                        </div>
+                        <p class="sub-info" id="visibilityStatus">Average visibility</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forecast Section -->
+            <section class="forecast-section">
+                <div class="forecast-header">
+                    <h2>7 Days Forecast</h2>
+                    <select id="forecastFilter" class="filter-select">
+                        <option value="7">7 days</option>
+                        <option value="5">5 days</option>
+                        <option value="3">3 days</option>
+                    </select>
+                </div>
+                <div id="forecastList" class="forecast-list">
+                    <!-- Forecast items will be populated by JavaScript -->
+                </div>
+
+                <!-- Weather Map -->
+                <div class="weather-map glass-card">
+                    <div class="map-header">
+                        <h3>Weather Condition Map</h3>
+                        <div class="map-info">
+                            <span>Precipitation</span>
+                            <div class="precipitation-bar">
+                                <div class="precipitation-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-display">
+                        <div class="map-overlay">
+                            <i class="fas fa-cloud-rain map-icon"></i>
+                            <p>Interactive map coming soon</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Map View -->
+        <div id="mapView" class="view-section">
+            <div class="view-header">
+                <h1><i class="fas fa-map"></i> Weather Map</h1>
+                <p>Interactive weather map with real-time data</p>
+            </div>
+            <div class="map-container glass-card">
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=0&zoom=2" 
+                        frameborder="0" 
+                        style="width:100%; height:600px; border-radius:12px;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="calendarView" class="view-section">
+            <div class="view-header">
+                <h1><i class="fas fa-calendar-alt"></i> Weather Calendar</h1>
+                <p>10-day weather forecast calendar</p>
+            </div>
+            <div class="calendar-container">
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+        </div>
+
+        <!-- Day Detail Modal -->
+        <div id="dayDetailModal" class="modal">
+            <div class="modal-content glass-card">
+                <span class="close-modal">&times;</span>
+                <div id="dayDetailContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Metric Detail Modal -->
+        <div id="metricDetailModal" class="modal">
+            <div class="modal-content glass-card">
+                <span class="close-modal">&times;</span>
+                <div id="metricDetailContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Graph View -->
+        <div id="graphView" class="view-section">
+            <div class="view-header">
+                <h1><i class="fas fa-chart-line"></i> Weather Trends</h1>
+                <p>Temperature and humidity trends over time</p>
+            </div>
+            <div class="charts-container">
+                <div class="chart-card glass-card">
+                    <h3>Temperature Trend (7 Days)</h3>
+                    <canvas id="temperatureChart"></canvas>
+                </div>
+                <div class="chart-card glass-card">
+                    <h3>Humidity & Wind Speed</h3>
+                    <canvas id="humidityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Moon Phase View -->
+        <div id="moonPhaseView" class="view-section">
+            <div class="view-header">
+                <h1><i class="fas fa-moon"></i> Moon Phase</h1>
+                <p>Current lunar phase and information</p>
+            </div>
+            <div class="moon-phase-container">
+                <div class="moon-phase-card glass-card">
+                    <div class="moon-visual">
+                        <div class="moon-circle" id="moonCircle">
+                            <div class="moon-shadow" id="moonShadow"></div>
+                        </div>
+                    </div>
+                    <h2 id="moonPhaseName">Waxing Gibbous</h2>
+                    <p class="moon-illumination" id="moonIllumination">82% Illuminated</p>
+                    <div class="moon-details">
+                        <div class="moon-detail-item">
+                            <i class="fas fa-calendar-day"></i>
+                            <div>
+                                <span class="detail-label">Next Full Moon</span>
+                                <span class="detail-value" id="nextFullMoon">January 5, 2025</span>
+                            </div>
+                        </div>
+                        <div class="moon-detail-item">
+                            <i class="fas fa-calendar-minus"></i>
+                            <div>
+                                <span class="detail-label">Next New Moon</span>
+                                <span class="detail-value" id="nextNewMoon">January 18, 2025</span>
+                            </div>
+                        </div>
+                        <div class="moon-detail-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <span class="detail-label">Moonrise</span>
+                                <span class="detail-value" id="moonrise">6:45 PM</span>
+                            </div>
+                        </div>
+                        <div class="moon-detail-item">
+                            <i class="fas fa-moon"></i>
+                            <div>
+                                <span class="detail-label">Moonset</span>
+                                <span class="detail-value" id="moonset">7:30 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="moon-phases-timeline glass-card">
+                    <h3>Lunar Cycle</h3>
+                    <div class="phases-grid">
+                        <div class="phase-item">
+                            <div class="phase-icon">🌑</div>
+                            <span>New Moon</span>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-icon">🌒</div>
+                            <span>Waxing Crescent</span>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-icon">🌓</div>
+                            <span>First Quarter</span>
+                        </div>
+                        <div class="phase-item active">
+                            <div class="phase-icon">🌔</div>
+                            <span>Waxing Gibbous</span>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-icon">🌕</div>
+                            <span>Full Moon</span>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-icon">🌖</div>
+                            <span>Waning Gibbous</span>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-icon">🌗</div>
+                            <span>Last Quarter</span>
+                        </div>
+                        <div class="phase-item">
+                            <div class="phase-icon">🌘</div>
+                            <span>Waning Crescent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings View -->
+        <div id="settingsView" class="view-section">
+            <div class="view-header">
+                <h1><i class="fas fa-cog"></i> Settings</h1>
+                <p>Customize your weather dashboard</p>
+            </div>
+            <div class="settings-container">
+                <div class="setting-card glass-card">
+                    <h3><i class="fas fa-thermometer-half"></i> Temperature Unit</h3>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-unit="celsius">°C Celsius</button>
+                        <button class="toggle-btn" data-unit="fahrenheit">°F Fahrenheit</button>
+                    </div>
+                </div>
+                <div class="setting-card glass-card">
+                    <h3><i class="fas fa-city"></i> Default City</h3>
+                    <input type="text" id="defaultCityInput" class="setting-input" placeholder="Enter default city" value="Mumbai">
+                    <button id="saveDefaultCity" class="save-btn">Save</button>
+                </div>
+                <div class="setting-card glass-card">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <label class="switch">
+                        <input type="checkbox" id="notificationsToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="setting-label">Enable weather alerts</span>
+                </div>
+                <div class="setting-card glass-card">
+                    <h3><i class="fas fa-moon"></i> Dark Mode</h3>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="setting-label">Toggle dark/light theme</span>
+                </div>
+                <div class="setting-card glass-card">
+                    <h3><i class="fas fa-info-circle"></i> About</h3>
+                    <p class="about-text">Weather Dashboard v1.0<br>Powered by OpenWeatherMap API<br>© 2025 All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

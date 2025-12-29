@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Categories - Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">🌙</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Welcome, <span id="userName">User</span>!</h1>
+            <div class="user-profile">
+                <div class="avatar-container">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23cbd5e0'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Avatar" class="user-avatar" id="userAvatar">
+                    <label for="changeAvatar" class="change-avatar-btn" title="Change Avatar">📷</label>
+                    <input type="file" id="changeAvatar" accept="image/*" hidden>
+                </div>
+                <a href="analytics.html" class="btn btn-primary">📊 My Analytics</a>
+                <a href="admin.html" class="btn btn-primary" id="adminBtn" style="display: none;">🔧 Admin Panel</a>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+        </div>
+
+        <div class="categories-container">
+            <h2>Choose a Quiz Category</h2>
+            
+            <div class="categories-grid">
+                <div class="category-card" data-category="general">
+                    <div class="category-icon">🌍</div>
+                    <h3>General Knowledge</h3>
+                    <p>Test your knowledge on various topics</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="science">
+                    <div class="category-icon">🔬</div>
+                    <h3>Science</h3>
+                    <p>Explore the world of science</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="technology">
+                    <div class="category-icon">💻</div>
+                    <h3>Technology</h3>
+                    <p>Test your tech knowledge</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="sports">
+                    <div class="category-icon">⚽</div>
+                    <h3>Sports</h3>
+                    <p>Challenge yourself with sports trivia</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="history">
+                    <div class="category-icon">📜</div>
+                    <h3>History</h3>
+                    <p>Journey through time and events</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="geography">
+                    <div class="category-icon">🗺️</div>
+                    <h3>Geography</h3>
+                    <p>Explore the world around you</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="movies">
+                    <div class="category-icon">🎬</div>
+                    <h3>Movies</h3>
+                    <p>Test your film knowledge</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="music">
+                    <div class="category-icon">🎵</div>
+                    <h3>Music</h3>
+                    <p>Rock out with music trivia</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="books">
+                    <div class="category-icon">📚</div>
+                    <h3>Books</h3>
+                    <p>Dive into literary knowledge</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+
+                <div class="category-card" data-category="animals">
+                    <div class="category-icon">🦁</div>
+                    <h3>Animals</h3>
+                    <p>Discover the animal kingdom</p>
+                    <button class="btn btn-primary">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📊 Quiz App</h3>
+                <p>Test your knowledge across multiple categories with our interactive quiz platform. Powered by Open Trivia Database API.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" title="Facebook">📘</a>
+                    <a href="#" class="social-link" title="Twitter">🐦</a>
+                    <a href="#" class="social-link" title="Instagram">📷</a>
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="analytics.html">My Analytics</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="quiz.html?category=general">General Knowledge</a></li>
+                    <li><a href="quiz.html?category=science">Science & Nature</a></li>
+                    <li><a href="quiz.html?category=technology">Technology</a></li>
+                    <li><a href="quiz.html?category=sports">Sports</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Quiz App. All rights reserved. | Semester V Project</p>
+            <p>Powered by <a href="https://opentdb.com/" target="_blank" rel="noopener">Open Trivia Database</a> & <a href="https://firebase.google.com/" target="_blank" rel="noopener">Firebase</a></p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+            } else {
+                db.collection('users').doc(user.uid).get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            const userData = doc.data();
+                            const displayName = userData.name || user.email.split('@')[0];
+                            document.getElementById('userName').textContent = displayName;
+                            
+                            if (userData.avatar) {
+                                document.getElementById('userAvatar').src = userData.avatar;
+                            }
+                            const adminBtn = document.getElementById('adminBtn');
+                            if (userData.admin === true) {
+                                adminBtn.style.display = 'inline-block';
+                            } else {
+                                adminBtn.style.display = 'none';
+                            }
+                        } else {
+                            document.getElementById('userName').textContent = user.email.split('@')[0];
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error loading user data:', error);
+                        document.getElementById('userName').textContent = user.email.split('@')[0];
+                    });
+                
+                loadCategoriesFromFirestore();
+            }
+        });
+
+        async function loadCategoriesFromFirestore() {
+            try {
+                const snapshot = await db.collection('categories').orderBy('name').get();
+                
+                if (!snapshot.empty) {
+                    const categoriesGrid = document.querySelector('.categories-grid');
+                    
+                    snapshot.forEach(doc => {
+                        const category = doc.data();
+                        const categoryId = doc.id;
+                        
+                        const card = document.createElement('div');
+                        card.className = 'category-card';
+                        card.dataset.category = categoryId;
+                        card.innerHTML = `
+                            <div class="category-icon">${category.icon}</div>
+                            <h3>${category.name}</h3>
+                            <p>${category.description}</p>
+                            <button class="btn btn-primary">Start Quiz</button>
+                        `;
+                        categoriesGrid.appendChild(card);
+                    });
+                    
+                    attachCategoryListeners();
+                }
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        document.getElementById('changeAvatar').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file && auth.currentUser) {
+                await uploadAvatar(file, auth.currentUser.uid);
+                location.reload();
+            }
+        });
+
+        function attachCategoryListeners() {
+            document.querySelectorAll('.category-card button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const category = e.target.closest('.category-card').dataset.category;
+                    window.location.href = `quiz.html?category=${category}`;
+                });
+            });
+        }
+
+        attachCategoryListeners();
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>

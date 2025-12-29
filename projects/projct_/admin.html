@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">🌙</button>
+    </div>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>📊 Admin Panel</h2>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="nav-link active" data-section="categories">
+                    <span class="nav-icon">📁</span>
+                    Categories
+                </a>
+                <a href="#" class="nav-link" data-section="questions">
+                    <span class="nav-icon">❓</span>
+                    Questions
+                </a>
+                <a href="#" class="nav-link" data-section="statistics">
+                    <span class="nav-icon">📈</span>
+                    Statistics
+                </a>
+                <a href="index.html" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    Back to Home
+                </a>
+            </nav>
+            <div class="admin-user">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23cbd5e0'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Admin" class="admin-avatar" id="adminAvatar">
+                <div class="admin-info">
+                    <span class="admin-name" id="adminName">Admin</span>
+                    <button id="logoutBtn" class="btn-logout">Logout</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            
+            <section id="categories-section" class="admin-section active">
+                <div class="section-header">
+                    <h1>Manage Categories</h1>
+                    <button class="btn btn-primary" id="addCategoryBtn">
+                        <span>➕</span> Add Category
+                    </button>
+                </div>
+
+                <div class="categories-grid" id="categoriesGrid">
+                    
+                </div>
+
+                
+                <div class="modal" id="categoryModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="categoryModalTitle">Add Category</h2>
+                            <button class="modal-close" id="closeCategoryModal">&times;</button>
+                        </div>
+                        <form id="categoryForm">
+                            <div class="form-group">
+                                <label for="categoryName">Category Name</label>
+                                <input type="text" id="categoryName" placeholder="e.g., General Knowledge" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryIcon">Icon (Emoji)</label>
+                                <input type="text" id="categoryIcon" placeholder="e.g., 🌍" maxlength="2" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryDescription">Description</label>
+                                <textarea id="categoryDescription" placeholder="Category description..." rows="3" required></textarea>
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelCategory">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Category</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="questions-section" class="admin-section">
+                <div class="section-header">
+                    <h1>Manage Questions</h1>
+                    <div class="header-controls">
+                        <select id="categorySelect" class="form-select">
+                            <option value="">Select Category</option>
+                        </select>
+                        <button class="btn btn-primary" id="addQuestionBtn" disabled>
+                            <span>➕</span> Add Question
+                        </button>
+                    </div>
+                </div>
+
+                <div class="questions-list" id="questionsList">
+                   
+                </div>
+
+                <!-- Add/Edit Question Modal -->
+                <div class="modal" id="questionModal">
+                    <div class="modal-content modal-large">
+                        <div class="modal-header">
+                            <h2 id="questionModalTitle">Add Question</h2>
+                            <button class="modal-close" id="closeQuestionModal">&times;</button>
+                        </div>
+                        <form id="questionForm">
+                            <div class="form-group">
+                                <label for="questionText">Question</label>
+                                <textarea id="questionText" placeholder="Enter question..." rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Options</label>
+                                <input type="text" id="option0" placeholder="Option A" required>
+                                <input type="text" id="option1" placeholder="Option B" required>
+                                <input type="text" id="option2" placeholder="Option C" required>
+                                <input type="text" id="option3" placeholder="Option D" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="correctAnswer">Correct Answer</label>
+                                <select id="correctAnswer" required>
+                                    <option value="">Select correct answer</option>
+                                    <option value="0">Option A</option>
+                                    <option value="1">Option B</option>
+                                    <option value="2">Option C</option>
+                                    <option value="3">Option D</option>
+                                </select>
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelQuestion">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Question</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="statistics-section" class="admin-section">
+                <div class="section-header">
+                    <h1>Statistics</h1>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📁</div>
+                        <div class="stat-info">
+                            <h3 id="totalCategories">0</h3>
+                            <p>Total Categories</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">❓</div>
+                        <div class="stat-info">
+                            <h3 id="totalQuestions">0</h3>
+                            <p>Total Questions</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3 id="totalUsers">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-stats" id="categoryStats">
+                   
+                </div>
+            </section>
+        </main>
+    </div>
+
+    
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase.js"></script>
+    <script src="auth.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

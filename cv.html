@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohsin Ali - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .resume-container {
+            display: flex;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Left Sidebar */
+        .sidebar {
+            width: 35%;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px 30px;
+        }
+        
+        .sidebar h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            color: #3498db;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-section {
+            margin-bottom: 35px;
+        }
+        
+        .contact-section h2 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item {
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+            word-break: break-word;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 35px;
+        }
+        
+        .sidebar-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: white;
+        }
+        
+        .sidebar-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-section li {
+            padding: 6px 0;
+            padding-left: 15px;
+            position: relative;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .sidebar-section li:before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 16px;
+        }
+        
+        .cert-item-sidebar {
+            margin-bottom: 12px;
+            font-size: 13px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .cert-item-sidebar:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        /* Right Main Content */
+        .main-content {
+            width: 65%;
+            padding: 40px 35px;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .header .tagline {
+            font-size: 16px;
+            color: #3498db;
+            font-weight: 600;
+            font-style: italic;
+        }
+        
+        .header .location {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .main-section {
+            margin-bottom: 30px;
+        }
+        
+        .main-section h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            text-transform: uppercase;
+        }
+        
+        .summary-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #34495e;
+            text-align: justify;
+        }
+        
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+        }
+        
+        .experience-header {
+            margin-bottom: 8px;
+        }
+        
+        .experience-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .experience-date {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .experience-description {
+            font-size: 14px;
+            color: #34495e;
+            line-height: 1.7;
+            margin-left: 15px;
+        }
+        
+        .experience-description li {
+            margin-bottom: 5px;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 3px 3px 3px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .resume-container {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="contact-section">
+                <h2>Contact</h2>
+                <div class="contact-item">
+                    📍 IBA Sukkur, Sindh, Pakistan
+                </div>
+                <div class="contact-item">
+                    📧 <a href="mailto:cadetmohsan@gmail.com">cadetmohsan@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    🔗 <a href="https://github.com/mosin1223">github.com/mosin1223</a>
+                </div>
+                <div class="contact-item">
+                    💼 <a href="https://www.linkedin.com/in/mohsin-ali-54a9b2319/">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    🎯 <a href="https://www.fiverr.com/sellers/mohsi88/edit">Fiverr Profile</a>
+                </div>
+                <div class="contact-item">
+                    ⚡ <a href="https://www.upwork.com/freelancers/~01607a29b1aba680d1">Upwork Profile</a>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Top Skills</h2>
+                <ul>
+                    <li>HTML5 & CSS3</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>React.js</li>
+                    <li>Node.js & Express</li>
+                    <li>Python Programming</li>
+                    <li>Data Analysis</li>
+                    <li>MongoDB & Databases</li>
+                    <li>Git & GitHub</li>
+                    <li>Responsive Design</li>
+                    <li>RESTful APIs</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Languages</h2>
+                <ul>
+                    <li><strong>English</strong> - Professional Working</li>
+                    <li><strong>Urdu</strong> - Native</li>
+                    <li><strong>Sindhi</strong> - Native or Bilingual</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Certifications</h2>
+                <div class="cert-item-sidebar">JavaScript Essential Training</div>
+                <div class="cert-item-sidebar">HTML, CSS & JavaScript</div>
+                <div class="cert-item-sidebar">Practical GitHub Actions</div>
+                <div class="cert-item-sidebar">Web Design & Development</div>
+                <div class="cert-item-sidebar">Python Programming</div>
+                <div class="cert-item-sidebar">Bootstrap 4 Responsive</div>
+                <div class="cert-item-sidebar">GitHub Project Management</div>
+                <div class="cert-item-sidebar">Multiple Coursera Certificates</div>
+            </div>
+        </div>
+
+        <!-- Right Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Mohsin Ali</h1>
+                <div class="tagline">Full Stack Developer | Innovating One Line of Code at a Time</div>
+                <div class="location">IBA Sukkur, Sindh, Pakistan</div>
+            </div>
+
+            <div class="main-section">
+                <h2>Summary</h2>
+                <p class="summary-text">
+                    Passionate Computer Science student at IBA Sukkur with strong expertise in full-stack web development 
+                    and data analysis. Proficient in modern web technologies including React, Node.js, and Python. 
+                    As a dedicated developer, my journey in Computer Science is shaping my analytical and coding competencies, 
+                    particularly in JavaScript, Python, and modern web frameworks. These tools are the cornerstone of my 
+                    educational experience, as I navigate through complex problem-solving tasks and academic projects. 
+                    Actively seeking opportunities to contribute to innovative projects and continue growing as a developer 
+                    in the dynamic tech landscape.
+                </p>
+            </div>
+
+            <div class="main-section">
+                <h2>Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Freelance Full Stack Developer & Data Analyst</div>
+                        <div class="experience-date">(2023 - Present)</div>
+                    </div>
+                    <ul class="experience-description">
+                        <li>Developed and deployed responsive websites using HTML, CSS, JavaScript, React, and Tailwind CSS</li>
+                        <li>Built interactive data dashboards and visualizations using Python libraries like Matplotlib and Seaborn</li>
+                        <li>Designed and trained machine learning models for predictive data analysis and business intelligence</li>
+                        <li>Collaborated effectively with clients to deliver high-quality projects with 100% satisfaction</li>
+                        <li>Specialized in frontend development, full-stack applications, and data-driven solutions</li>
+                    </ul>
+                    <div style="margin-top: 8px;">
+                        <span class="tech-badge">React</span>
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Education</h2>
+                
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Bachelor of Science, Computer Science</div>
+                        <div class="experience-date">(2023 - 2027)</div>
+                    </div>
+                    <div class="experience-description">
+                        <strong>IBA Sukkur (Institute of Business Administration)</strong><br>
+                        Focused on software development, data structures, algorithms, database management, and web technologies. 
+                        Active participation in coding competitions and tech communities.
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Matriculation & Intermediate</div>
+                        <div class="experience-date">(2019 - 2022)</div>
+                    </div>
+                    <div class="experience-description">
+                        <strong>Cadet College Larkana</strong><br>
+                        <strong>Matriculation (SSC):</strong> Science<br>
+                        <strong>Intermediate (HSSC):</strong> Pre-Engineering<br>
+                        Completed secondary and higher secondary education with focus on science and engineering subjects. 
+                        Developed strong foundation in mathematics, physics, chemistry, and analytical thinking through cadet training and discipline.
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Featured Projects</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Personal Portfolio Website</div>
+                    </div>
+                    <ul class="experience-description">
+                        <li>Designed and developed a modern, responsive portfolio website featuring smooth animations</li>
+                        <li>Integrated contact form with EmailJS for direct client communication</li>
+                        <li>Showcased projects, certificates, and professional services with elegant dark theme design</li>
+                    </ul>
+                    <div style="margin-top: 8px;">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Weather Application</div>
+                    </div>
+                    <ul class="experience-description">
+                        <li>Built real-time weather application with API integration</li>
+                        <li>Implemented location-based weather updates and 5-day forecasts</li>
+                        <li>Created clean, intuitive interface with responsive design</li>
+                    </ul>
+                    <div style="margin-top: 8px;">
+                        <span class="tech-badge">React</span>
+                        <span class="tech-badge">API Integration</span>
+                        <span class="tech-badge">Responsive Design</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Data Dashboard</div>
+                    </div>
+                    <ul class="experience-description">
+                        <li>Created interactive data dashboard for visualizing complex datasets</li>
+                        <li>Implemented data processing pipelines and filtering capabilities</li>
+                        <li>Used Python libraries for data analysis and visualization</li>
+                    </ul>
+                    <div style="margin-top: 8px;">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Pandas</span>
+                        <span class="tech-badge">Data Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
