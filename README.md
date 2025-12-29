@@ -11,19 +11,31 @@
 ## 📸 Preview
 
 ### Hero Section
-![Hero Section](images/portfolio%20screen%20shot/hero-dark.png)
+![Hero Section](images/portfolio%20screen%20shot/hero-section.png)
+
+### About Me
+![About Me](images/portfolio%20screen%20shot/aboutme.png)
+
+### Technologies
+![Technologies](images/portfolio%20screen%20shot/technologies.png)
 
 ### Projects Showcase
 ![Projects Section](images/portfolio%20screen%20shot/projects.png)
 
-### Light Mode
-![Light Mode](images/portfolio%20screen%20shot/light-mode.png)
-
-### Mobile Responsive
-![Mobile View](images/portfolio%20screen%20shot/mobile.png)
+### Upcoming Projects
+![Upcoming Projects](images/portfolio%20screen%20shot/upcoming_projects.png)
 
 ### Certificates
 ![Certificates Section](images/portfolio%20screen%20shot/certificates.png)
+
+### Services
+![Services](images/portfolio%20screen%20shot/services.png)
+
+### Get In Touch
+![Contact Section](images/portfolio%20screen%20shot/getintounch.png)
+
+### Light Mode
+![Light Mode](images/portfolio%20screen%20shot/lightmode.png)
 
 ## ✨ Features
 
