@@ -86,6 +86,7 @@ portfolio/
     ├── projct_/           # Quiz Application
     ├── weather dashboard/
     ├── weather-app/
+    ├── Todo_project/      # Todo Application
     └── portfolio/
 ```
 
@@ -112,6 +113,7 @@ portfolio/
   - Quiz Application (Firebase-based)
   - Weather Dashboard (API integration)
   - Data Analysis Dashboard (Python)
+  - Todo Application (React + Vite)
 - **Upcoming Projects:**
   - 8 projects in development
 
